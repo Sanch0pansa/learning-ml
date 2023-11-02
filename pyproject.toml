@@ -7,9 +7,9 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-torch = {version = "^2.1.0+cpu", source = "pytorch"}
 torchvision = {version = "^0.16.0+cpu", source = "pytorch"}
 matplotlib = "^3.8.0"
+torch = {version = "^2.1.0+cu118", source = "pytorch"}
 
 
 [[tool.poetry.source]]
@@ -20,7 +20,7 @@ priority = "explicit"
 
 [[tool.poetry.source]]
 name = "pytorch"
-url = "https://download.pytorch.org/whl/cpu"
+url = "https://download.pytorch.org/whl/cu118"
 priority = "explicit"
 
 [build-system]

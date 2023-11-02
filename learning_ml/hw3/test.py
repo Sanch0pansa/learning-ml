@@ -1,19 +1,30 @@
 import torch
 import torchvision
 from model import Net
-from data import testloader, imshow, classes
+from data import testloader, imshow, classes, testset
+
+import sys
+from_save = "nn.path"
+for i in range(len(sys.argv)):
+    if sys.argv[i] == "--from":
+        if i < len(sys.argv) - 1:
+            from_save = sys.argv[i + 1]
+
+device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
 dataiter = iter(testloader)
 images, labels = next(dataiter)
 
 # print images
-imshow(torchvision.utils.make_grid(images))
+# imshow(torchvision.utils.make_grid(images))
 print('GroundTruth: ', ' '.join(f'{classes[labels[j]]:5s}' for j in range(4)))
 
-PATH = "learning_ml/hw3/nn2.pth"
+PATH = from_save
 net = Net()
+net.to(device)
 net.load_state_dict(torch.load(PATH))
-outputs = net(images)
+
+outputs = net(images.to(device))
 
 _, predicted = torch.max(outputs, 1)
 
@@ -26,6 +37,7 @@ total = 0
 with torch.no_grad():
     for data in testloader:
         images, labels = data
+        images, labels = images.to(device), labels.to(device)
         # calculate outputs by running images through the network
         outputs = net(images)
         # the class with the highest energy is what we choose as prediction
@@ -43,6 +55,7 @@ total_pred = {classname: 0 for classname in classes}
 with torch.no_grad():
     for data in testloader:
         images, labels = data
+        images, labels = images.to(device), labels.to(device)
         outputs = net(images)
         _, predictions = torch.max(outputs, 1)
         # collect the correct predictions for each class

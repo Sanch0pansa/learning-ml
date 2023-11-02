@@ -38,7 +38,7 @@ def imshow(img):
 dataiter = iter(trainloader)
 images, labels = next(dataiter)
 
-# show images
-imshow(torchvision.utils.make_grid(images))
-# print labels
-print(' '.join(f'{classes[labels[j]]:5s}' for j in range(batch_size)))
+# # show images
+# imshow(torchvision.utils.make_grid(images))
+# # print labels
+# print(' '.join(f'{classes[labels[j]]:5s}' for j in range(batch_size)))
