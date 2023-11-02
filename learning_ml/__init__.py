@@ -1,3 +1,4 @@
-from hw3.test import a
+import hw3
 
-print(a)
+hw3.train(epochs=4)
+hw3.test()
