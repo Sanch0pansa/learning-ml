@@ -3,8 +3,8 @@ import torchvision
 from .model import Net
 from .data import testloader, imshow, classes, testset
 
-def test(from_save="nn.pth"):
-    device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+def test(from_save="nn.pth", cuda=True):
+    device = torch.device('cuda:0' if torch.cuda.is_available() and cuda else 'cpu')
 
     dataiter = iter(testloader)
     images, labels = next(dataiter)

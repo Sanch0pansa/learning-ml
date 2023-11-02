@@ -10,6 +10,7 @@ python = "^3.10"
 torchvision = {version = "^0.16.0+cpu", source = "pytorch"}
 matplotlib = "^3.8.0"
 torch = {version = "^2.1.0+cu118", source = "pytorch"}
+wandb = "^0.15.12"
 
 
 [[tool.poetry.source]]
