@@ -7,7 +7,7 @@ from torchmetrics.functional import accuracy
 from torch.optim.lr_scheduler import StepLR
 
 class CIFARLitModel(L.LightningModule):
-    def __init__(self, channels, width, height, num_classes, hidden_size=64, learning_rate=2e-4):
+    def __init__(self, channels, width, height, num_classes, hidden_size=64, learning_rate=2e-2):
         super().__init__()
         self.save_hyperparameters()
 
@@ -43,7 +43,6 @@ class CIFARLitModel(L.LightningModule):
         logits = self(x)
         loss = F.nll_loss(logits, y)
         self.log("train_loss", loss, prog_bar=True)
-        self.log("lr", self.learning_rate, prog_bar=True)
         return loss
 
     def validation_step(self, batch, batch_idx):
@@ -58,4 +57,4 @@ class CIFARLitModel(L.LightningModule):
     def configure_optimizers(self):
         optimizer = torch.optim.SGD(self.parameters(), lr=self.learning_rate, momentum=0.9)
         sch = StepLR(optimizer, step_size=1, gamma=0.1)
-        return {"optimizer": optimizer, "scheduler": sch}
+        return [optimizer], [sch]
