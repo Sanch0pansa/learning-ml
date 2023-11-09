@@ -28,4 +28,6 @@ def train(from_load=None, to_load="./nn.pth"):
     if to_load:
         torch.save(model.state_dict(), to_load)
 
-train(to_load="nn2.pth")
+# train(to_load="nn2.pth")
+if __name__ == "__main__":
+    train(to_load="nn.pth")
