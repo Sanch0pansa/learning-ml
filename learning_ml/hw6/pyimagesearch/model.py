@@ -50,9 +50,9 @@ class Encoder(Module):
 			# pass the inputs through the current encoder block, store
 			# the outputs, and then apply maxpooling on the output
 			x = block(x)
-			x = self.pool(x)
 			# print(x.shape)
 			block_outputs.append(x)
+			x = self.pool(x)
 
 		# return the list containing the intermediate outputs
 		return block_outputs
